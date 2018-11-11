@@ -22,8 +22,26 @@ JsForm es una librería Javascript, que permite defnir un formulario BootStrap p
 
 Esta compuesta por la siguientes funcionalidades: Definición del Fomulario, Definiciones de las reglas de validación, tanto de captura como previas al envío, generar el JSON para enviar a almacenar al servidor.
 
+**Table de contenido:** 
 
-Ejemplo
+- [jsForm](#)
+  - [Caracteristicas](#caracteristicas)
+  - [Ejemplo de uso](#uso)
+  - [Formulario](#formulario)
+  - [Validación](#validacion)
+  - [Envío de formulario](#envio)
+  - [Soporte, errores y solicitudes](#soporte)
+  - [Autor](#autor)
+  - [License](#license)
+
+## caracteristicas
+* Formulario. Definición del formulario a partir de un esquema JSON
+* Validación,  para la captura y el envío
+* Envío, del formulario en formato JSON
+* Soporte al ciclo de vida de un CRUD
+
+
+Ejemplo de uso
 ---------------
 
 Este es un ejemplo simple, para generar un formulario de acuerdo a la definicón de la Guía Gráfica de Gob.MX. Como se aprercia, se respeta la plantilla original y los componentes se incorporan de forma natural.
@@ -64,6 +82,149 @@ Este es un ejemplo simple, para generar un formulario de acuerdo a la definicón
 </html>
 ```
 
+Esquema
+```json
+{
+  "jsonForm": {
+    "name": "gob.mx",
+    "header": {
+      "title": "Formulario básico",
+      "subtitle": "Ejemplo de formulario básico",
+      "intro": "Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit. Duis consectetur libero id gravida volutpat. Nunc mauris lorem, sodales eu suscipit id, fermentum vitae neque."
+    },
+	"cols":3,
+	"class1":"form-horizontal",
+	"class":"clearfix",
+    "inputs": [
+      {
+        "type": "text",
+        "name": "nombre",
+        "label": "Nombre(s)",
+        "placeholder": "ayuda",
+		"required" : true
+      },
+      {
+        "type": "text",
+        "name": "firstName",
+        "label": "Primer apellido",
+        "placeholder": "Ingresa tu primer apellido",
+		"required" : true
+      },
+      {
+        "type": "text",
+        "name": "secondName",
+        "label": "Segundo apellido",
+        "placeholder": "Ingresa tu segundo apellido"
+      },
+      {
+        "type": "number",
+        "name": "lada",
+        "label": "Lada*:",
+        "placeholder": "Lada"
+      },
+      {
+        "type": "text",
+        "name": "telefono",
+        "label": "Teléfono fijo",
+        "placeholder": "Teléfono"
+      },
+      {
+        "type": "text",
+        "name": "correo",
+        "label": "Correo electrónico",
+        "placeholder": "Correo electrónico"
+      },
+      {
+        "type"			: "radio",
+        "name"			: "sexo",
+        "label"			: "Sexo*:",
+        "placeholder"	: "Sexo",
+		"class"      	: "radio-inline",
+		"direction"		: "horizontal",
+		"values"		: [
+			{"value":"H", "text":"Hombre"},
+			{"value":"M", "text":"Mujer"}
+		]
+      },
+      {
+        "type": "radio",
+        "name": "nacionalidad",
+        "label": "Nacionalidad*:",
+        "placeholder": "nacionalidad",
+		"class"      	: "radio-inline",
+		"direction"		: "horizontal",
+		"values"		: [
+			{"value":"M", "text":"Mexicano"},
+			{"value":"E", "text":"Extranjero"}
+		]
+      },
+      {
+        "type": "radio",
+        "name": "estadoCivil",
+        "label": "Estado civil",
+		"class"      	: "radio-inline",
+		"direction"		: "vertical",
+        "placeholder": "Estado civil",
+		"values"		: [
+			{"value":"1", "text":"Soltero"},
+			{"value":"2", "text":"Casado"},
+			{"value":"3", "text":"Unión libre"},
+			{"value":"4", "text":"Divorciado"},
+			{"value":"5", "text":"Viudo"}
+		]
+      },
+      {
+        "type": "radio",
+        "name": "vivienda",
+        "label": "Tipo de vivienda*:",
+		"class"      	: "radio-inline",
+		"direction"		: "vertical",
+        "placeholder": "vivienda",
+		"values"		: [
+			{"value":"a", "text":"Propia"},
+			{"value":"b", "text":"Alquilada"},
+			{"value":"c", "text":"Hipotecada"},
+			{"value":"d", "text":"De un familiar"},
+			{"value":"e", "text":"Otros"}
+		]
+      },
+      {
+        "type": "date",
+        "name": "fechaNac",
+        "label": "Fecha de nacimiento*:",
+        "placeholder": "fechaNac"
+      }
+    ],
+    "buttons": [
+      {
+	    "type"			: "checkbox",
+        "name"			: "terminos",
+        "label"			: " ",		
+		"class"      	: "radio-inline",
+		"direction"		: "vertical",
+        "placeholder"	: "Acepto los términos",
+		"values"		: [
+			{"value":"s", "text":"Acepto los términos"}
+		]
+      },
+	      {
+		"type"			: "button",
+        "name": "cancelar",
+        "label": "cancelar",
+		"class"      	: "btn btn-default",
+        "placeholder": "cancelar"
+      },
+      {
+		"type"			: "button",
+        "name": "enviar",
+        "label": "enviar",
+		"class"      	: "btn btn-primary",
+        "placeholder": "enviar"
+      }
+    ]
+  }
+}
+```
 
 
 Documentación
