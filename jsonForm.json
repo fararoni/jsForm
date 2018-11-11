@@ -1,32 +1,95 @@
-{"jsonForm": {
-    name:"gob.mx",
-    header:{
-      title:"Formulario básico",
-      subtitle:"Ejemplo de formulario básico",
-      intro:"Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit. Duis consectetur libero id gravida volutpat. Nunc mauris lorem, sodales eu suscipit id, fermentum vitae neque."
+{
+  "jsonForm": {
+    "name": "gob.mx",
+    "header": {
+      "title": "Formulario básico",
+      "subtitle": "Ejemplo de formulario básico",
+      "intro": "Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit. Duis consectetur libero id gravida volutpat. Nunc mauris lorem, sodales eu suscipit id, fermentum vitae neque."
+    },
+    "inputs": [
+      {
+        "type": "text",
+        "name": "nombre",
+        "label": "Nombre(s)*:",
+        "placeholder": "ayuda"
       },
-    inputs:[
-      { "type":"text", "name":"nombre", label:"Nombre(s)*:", placeholder:"ayuda"},
-      { "type":"text", "name":"firstName", label:"Primer apellido*:",placeholder:"Ingresa tu primer apellido"},
-      { "type":"text", "name":"secondName", label:"Segundo apellido*:",placeholder:"Ingresa tu segundo apellido"},
-      
-      { "type":"text", "name":"lada", label:"Lada*:",placeholder:"Lada"},
-      { "type":"text","name":"telefono", label:"Teléfono fijo*:",placeholder:"Teléfono"},
-      { "type":"text","name":"correo", label:"Correo electrónico*:",placeholder:"Correo electrónico"},
-      
-      { "type":"radio", "name":"sexo", label:"Sexo*:",placeholder:"Sexo"},
-      { "type":"radio", "name":"nacionalidad", label:"Nacionalidad*:",placeholder:"nacionalidad"},
-      
-      { "type":"radio", "name":"estadoCivil", label:"Estado civil*:",placeholder:"Estado civil"},
-      { "type":"radio", "name":"vivienda", label:"Tipo de vivienda*:",placeholder:"vivienda"},
-      { "type":"date", "name":"fechaNac", label:"Fecha de nacimiento*:",placeholder:"fechaNac"},
-      
-      { "name":"terminos", label:"Acepto los términos",placeholder:"Acepto los términos"}
-
+      {
+        "type": "text",
+        "name": "firstName",
+        "label": "Primer apellido*:",
+        "placeholder": "Ingresa tu primer apellido"
+      },
+      {
+        "type": "text",
+        "name": "secondName",
+        "label": "Segundo apellido*:",
+        "placeholder": "Ingresa tu segundo apellido"
+      },
+      {
+        "type": "text",
+        "name": "lada",
+        "label": "Lada*:",
+        "placeholder": "Lada"
+      },
+      {
+        "type": "text",
+        "name": "telefono",
+        "label": "Teléfono fijo*:",
+        "placeholder": "Teléfono"
+      },
+      {
+        "type": "text",
+        "name": "correo",
+        "label": "Correo electrónico*:",
+        "placeholder": "Correo electrónico"
+      },
+      {
+        "type": "radio",
+        "name": "sexo",
+        "label": "Sexo*:",
+        "placeholder": "Sexo"
+      },
+      {
+        "type": "radio",
+        "name": "nacionalidad",
+        "label": "Nacionalidad*:",
+        "placeholder": "nacionalidad"
+      },
+      {
+        "type": "radio",
+        "name": "estadoCivil",
+        "label": "Estado civil*:",
+        "placeholder": "Estado civil"
+      },
+      {
+        "type": "radio",
+        "name": "vivienda",
+        "label": "Tipo de vivienda*:",
+        "placeholder": "vivienda"
+      },
+      {
+        "type": "date",
+        "name": "fechaNac",
+        "label": "Fecha de nacimiento*:",
+        "placeholder": "fechaNac"
+      },
+      {
+        "name": "terminos",
+        "label": "Acepto los términos",
+        "placeholder": "Acepto los términos"
+      }
     ],
-    buttons:[
-        { "name":"enviar", label:"enviar*:",placeholder:"enviar"},
-      { "name":"cancelar", label:"cancelar",placeholder:"cancelar"}
+    "buttons": [
+      {
+        "name": "enviar",
+        "label": "enviar*:",
+        "placeholder": "enviar"
+      },
+      {
+        "name": "cancelar",
+        "label": "cancelar",
+        "placeholder": "cancelar"
+      }
     ]
   }
 }
