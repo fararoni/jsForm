@@ -69,6 +69,8 @@ var tmplTabs = function(jsonNode){
 		formElement.setAttribute("class", 'form-control');
 	return formElement;
 }
+
+
 //-----------------------------------------------------------
 function parseJsonForm(jsonObj) {
 	console.log("jsonObj:" + jsonObj);
