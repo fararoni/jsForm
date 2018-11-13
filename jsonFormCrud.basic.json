@@ -12,146 +12,56 @@
         },
         "inputs": [
             {
-              "type": "text",
-              "name": "nombre",
-              "label": "Nombre(s)",
-              "placeholder": "ayuda",
-              "required": true
+                "type": "text",
+                "name": "nombre",
+                "model": true,
+                "label": "Nombre(s)",
+                "placeholder": "ayuda",
+                "validations": [
+                    {
+                        "required": true,
+                        "input": "alpha"
+                    }
+                ]
             },
             {
-              "type": "text",
-              "name": "firstName",
-              "label": "Primer apellido",
-              "placeholder": "Ingresa tu primer apellido",
-              "required": true
+                "type": "text",
+                "name": "firstName",
+                "label": "Primer apellido",
+                "placeholder": "Ingresa tu primer apellido",
+                "required": true
             },
-            {
-              "type": "text",
-              "name": "secondName",
-              "label": "Segundo apellido",
-              "placeholder": "Ingresa tu segundo apellido"
-            },
-            {
-              "type": "number",
-              "name": "lada",
-              "label": "Lada*:",
-              "placeholder": "Lada"
-            },
-            {
-              "type": "text",
-              "name": "telefono",
-              "label": "Teléfono fijo",
-              "placeholder": "Teléfono"
-            },
-            {
-              "type": "text",
-              "name": "correo",
-              "label": "Correo electrónico",
-              "placeholder": "Correo electrónico"
-            },
-            {
-              "type": "radio",
-              "name": "sexo",
-              "label": "Sexo*:",
-              "placeholder": "Sexo",
-              "class": "radio-inline",
-              "direction": "horizontal",
-              "values": [
-                {
-                  "value": "H",
-                  "text": "Hombre"
-                },
-                {
-                  "value": "M",
-                  "text": "Mujer"
-                }
-              ]
-            },
-            {
-              "type": "radio",
-              "name": "nacionalidad",
-              "label": "Nacionalidad*:",
-              "placeholder": "nacionalidad",
-              "class": "radio-inline",
-              "direction": "horizontal",
-              "values": [
-                {
-                  "value": "M",
-                  "text": "Mexicano"
-                },
-                {
-                  "value": "E",
-                  "text": "Extranjero"
-                }
-              ]
-            },
-            {
-              "type": "radio",
-              "name": "estadoCivil",
-              "label": "Estado civil",
-              "class": "radio-inline",
-              "direction": "vertical",
-              "placeholder": "Estado civil",
-              "values": [
-                {
-                  "value": "1",
-                  "text": "Soltero"
-                },
-                {
-                  "value": "2",
-                  "text": "Casado"
-                },
-                {
-                  "value": "3",
-                  "text": "Unión libre"
-                },
-                {
-                  "value": "4",
-                  "text": "Divorciado"
-                },
-                {
-                  "value": "5",
-                  "text": "Viudo"
-                }
-              ]
-            },
-            {
-              "type": "radio",
-              "name": "vivienda",
-              "label": "Tipo de vivienda*:",
-              "class": "radio-inline",
-              "direction": "vertical",
-              "placeholder": "vivienda",
-              "values": [
-                {
-                  "value": "a",
-                  "text": "Propia"
-                },
-                {
-                  "value": "b",
-                  "text": "Alquilada"
-                },
-                {
-                  "value": "c",
-                  "text": "Hipotecada"
-                },
-                {
-                  "value": "d",
-                  "text": "De un familiar"
-                },
-                {
-                  "value": "e",
-                  "text": "Otros"
-                }
-              ]
-            },
-            {
-              "type": "date",
-              "name": "fechaNac",
-              "label": "Fecha de nacimiento*:",
-              "placeholder": "fechaNac"
-            }
-          ],
+			{
+				"type": "radio",
+				"name": "estadoCivil",
+				"label": "Estado civil",
+				"class": "radio-inline",
+				"direction": "vertical",
+				"placeholder": "Estado civil",
+				"values": [
+					{
+						"value": "1",
+						"text": "Soltero"
+					},
+					{
+						"value": "2",
+						"text": "Casado"
+					},
+					{
+						"value": "3",
+						"text": "Unión libre"
+					},
+					{
+						"value": "4",
+						"text": "Divorciado"
+					},
+					{
+						"value": "5",
+						"text": "Viudo"
+					}
+				]
+			}
+        ],
         "toolbar": [
             {
                 "type": "checkbox",

@@ -1,168 +1,170 @@
 {
     "form": {
-        "method": "get",
-        "name": "datos",
-        "action": "self",
-        "class": "clearfix",
-        "columns": 3,
-        "inputs": [
+      "method": "get",
+      "name": "datos",
+      "action": "self",
+      "class": "clearfix",
+      "inputs": [
+        {
+          "type": "text",
+          "name": "nombre",
+          "model": true,
+          "label": "Nombre(s)",
+          "placeholder": "ayuda",
+          "validations": [
             {
-                "type": "text",
-                "name": "nombre",
-                "model": true,
-                "label": "Nombre(s)",
-                "placeholder": "ayuda",
-                "validations": [
-                    {
-                        "required": true,
-                        "input": "alpha"
-                    }
-                ]
-            },
-            {
-                "type": "text",
-                "name": "firstName",
-                "label": "Primer apellido",
-                "placeholder": "Ingresa tu primer apellido",
-                "required": true
-            },
-            {
-                "type": "text",
-                "name": "secondName",
-                "label": "Segundo apellido",
-                "placeholder": "Ingresa tu segundo apellido"
-            },
-            {
-                "type": "tabs",
-                "name": "Firma DGENAM",
-                "group": [
-                    {
-                        "name": "Inicio",
-                        "title": "Inicio",
-                        "inputs": [
-                            {
-                                "type": "number",
-                                "name": "lada",
-                                "label": "Lada*:",
-                                "placeholder": "Lada"
-                            },
-                            {
-                                "type": "text",
-                                "name": "telefono",
-                                "label": "Teléfono fijo",
-                                "placeholder": "Teléfono"
-                            },
-                            {
-                                "type": "text",
-                                "name": "correo",
-                                "label": "Correo electrónico",
-                                "placeholder": "Correo electrónico"
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Cargar archivo",
-                        "inputs": [
-                            {
-                                "type": "radio",
-                                "name": "sexo",
-                                "label": "Sexo*:",
-                                "placeholder": "Sexo",
-                                "class": "radio-inline",
-                                "direction": "horizontal",
-                                "values": [
-                                    {
-                                        "value": "H",
-                                        "text": "Hombre"
-                                    },
-                                    {
-                                        "value": "M",
-                                        "text": "Mujer"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "radio",
-                                "name": "nacionalidad",
-                                "label": "Nacionalidad*:",
-                                "placeholder": "nacionalidad",
-                                "class": "radio-inline",
-                                "direction": "horizontal",
-                                "values": [
-                                    {
-                                        "value": "M",
-                                        "text": "Mexicano"
-                                    },
-                                    {
-                                        "value": "E",
-                                        "text": "Extranjero"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "radio",
-                                "name": "estadoCivil",
-                                "label": "Estado civil",
-                                "class": "radio-inline",
-                                "direction": "vertical",
-                                "placeholder": "Estado civil",
-                                "values": [
-                                    {
-                                        "value": "1",
-                                        "text": "Soltero"
-                                    },
-                                    {
-                                        "value": "2",
-                                        "text": "Casado"
-                                    },
-                                    {
-                                        "value": "3",
-                                        "text": "Unión libre"
-                                    },
-                                    {
-                                        "value": "4",
-                                        "text": "Divorciado"
-                                    },
-                                    {
-                                        "value": "5",
-                                        "text": "Viudo"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
+              "required": true,
+              "input": "alpha"
             }
-        ],
-        "toolbar": [
-            {
-                "type": "checkbox",
-                "name": "terminos",
-                "label": " ",
-                "class": "radio-inline",
-                "direction": "vertical",
-                "placeholder": "Acepto los términos",
-                "values": [
-                    {
-                        "value": "s",
-                        "text": "Acepto los términos"
-                    }
+          ]
+        },
+        {
+          "type": "text",
+          "name": "firstName",
+          "label": "Primer apellido",
+          "placeholder": "Ingresa tu primer apellido",
+          "required": true
+        },
+        {
+          "type": "text",
+          "name": "secondName",
+          "label": "Segundo apellido",
+          "placeholder": "Ingresa tu segundo apellido"
+        },
+        {
+          "group": {
+            "type": "tabs",
+            "name": "Firma DGENAM",
+            "panels": [
+              {
+                "name": "Inicio",
+                "title": "Inicio",
+                "inputs": [
+                  {
+                    "type": "number",
+                    "name": "lada",
+                    "label": "Lada*:",
+                    "placeholder": "Lada"
+                  },
+                  {
+                    "type": "text",
+                    "name": "telefono",
+                    "label": "Teléfono fijo",
+                    "placeholder": "Teléfono"
+                  },
+                  {
+                    "type": "text",
+                    "name": "correo",
+                    "label": "Correo electrónico",
+                    "placeholder": "Correo electrónico"
+                  }
                 ]
-            },
+              },
+              {
+                "name": "Cargar archivo",
+                "inputs": [
+                  {
+                    "type": "radio",
+                    "name": "sexo",
+                    "label": "Sexo*:",
+                    "placeholder": "Sexo",
+                    "class": "radio-inline",
+                    "direction": "horizontal",
+                    "values": [
+                      {
+                        "value": "H",
+                        "text": "Hombre"
+                      },
+                      {
+                        "value": "M",
+                        "text": "Mujer"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "radio",
+                    "name": "nacionalidad",
+                    "label": "Nacionalidad*:",
+                    "placeholder": "nacionalidad",
+                    "class": "radio-inline",
+                    "direction": "horizontal",
+                    "values": [
+                      {
+                        "value": "M",
+                        "text": "Mexicano"
+                      },
+                      {
+                        "value": "E",
+                        "text": "Extranjero"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "radio",
+                    "name": "estadoCivil",
+                    "label": "Estado civil",
+                    "class": "radio-inline",
+                    "direction": "vertical",
+                    "placeholder": "Estado civil",
+                    "values": [
+                      {
+                        "value": "1",
+                        "text": "Soltero"
+                      },
+                      {
+                        "value": "2",
+                        "text": "Casado"
+                      },
+                      {
+                        "value": "3",
+                        "text": "Unión libre"
+                      },
+                      {
+                        "value": "4",
+                        "text": "Divorciado"
+                      },
+                      {
+                        "value": "5",
+                        "text": "Viudo"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "toolbar": [
+        {
+          "type": "checkbox",
+          "name": "terminos",
+          "label": " ",
+          "class": "radio-inline",
+          "direction": "vertical",
+          "placeholder": "Acepto los términos",
+          "values": [
             {
-                "type": "button",
-                "name": "cancelar",
-                "label": "cancelar",
-                "class": "btn btn-default",
-                "placeholder": "cancelar"
-            },
-            {
-                "type": "button",
-                "name": "enviar",
-                "label": "enviar",
-                "class": "btn btn-primary",
-                "placeholder": "enviar"
+              "value": "s",
+              "text": "Acepto los términos"
             }
-        ]
+          ]
+        },
+        {
+          "type": "button",
+          "name": "cancelar",
+          "label": "cancelar",
+          "class": "btn btn-default",
+          "placeholder": "cancelar"
+        },
+        {
+          "type": "button",
+          "name": "enviar",
+          "label": "enviar",
+          "class": "btn btn-primary",
+          "placeholder": "enviar"
+        }
+      ],
+      "columns": 3
     }
-}
+  }

@@ -15,8 +15,26 @@ function generateForm(jsonForm, cols){
 		var child = generateForm(jsonForm.form.inputs, cols);
 		nodo.appendChild(child);	
 		return nodo;
-	} else if (isSet(jsonForm.group) ) {
-		console.log("Generando group." + jsonForm.group);
+	} else if (isSet(jsonForm.panels) ) {
+		var divRowGroup = document.createElement("div");
+			divRowGroup.className = 'row';
+
+		var divRow = document.createElement("div");
+			divRow.className = 'row';
+
+		console.log("Generando panels." + jsonForm.panels);
+		
+//		var cols = jsonForm.form.columns;
+		for (var j = 0; j < jsonForm.panels.length; j++) {
+			var divCol = document.createElement("div");
+			var input = jsonForm.panels[j];
+			var nodo =  generateForm(input.inputs, cols);
+			divCol.appendChild(nodo);
+			divRow.appendChild(divCol); 
+		}
+		
+		divRowGroup.appendChild(divRow);	
+		return divRowGroup;
 		
 	} else if (Array.isArray(jsonForm) ) {
 		console.log("Generando inputs." );
@@ -30,9 +48,11 @@ function generateForm(jsonForm, cols){
 				divCol.className = 'col-md-' + (12 / cols);
 				var input = jsonForm[j];
 				if (isSet(input.group) ){
-					var childs = generateForm(input.paginas, cols);
+					var nodo = generateForm(input.group, cols);
+					///var  nodo = inputTypes[jsonForm[j].type](input);
+				} else {
+					var  nodo = inputTypes[jsonForm[j].type](input);
 				}
-				var  nodo = inputTypes[jsonForm[j].type](input);
 				divCol.appendChild(nodo);
 				divRow.appendChild(divCol); 
 
@@ -51,10 +71,11 @@ function generateForm(jsonForm, cols){
 //------ Tools
 var inputTypes = {
 	'form'	: function(jsNode) {return tmplForm(jsNode)},
+	'panels': function(jsNode) {return tmplPanels(jsNode)},
 	'text'	: function(jsNode) {return tmplInput(jsNode)},
-	'number'	: function(jsNode) {return tmplInput(jsNode)},
+	'number': function(jsNode) {return tmplInput(jsNode)},
 	'date'	: function(jsNode) {return tmplInput(jsNode)},
-	'tabs'	: function(jsNode) {return tmplText(jsNode)},
+	'tabs'	: function(jsNode) {return tmplTabs(jsNode)},
 	'radio'	: function(jsNode) {return tmplOptionsInput(jsNode)},
 }
 
@@ -92,6 +113,16 @@ var  tmplForm = function(jsonNode){
 	//section.appendChild(formElement);
 	return formElement;
 }
+var  tmplPanels = function(jsonNode){
+	console.log("Generando tmplForm." + jsonNode.name);
+	var formElement = document.createElement("dir");
+		formElement.setAttribute("id"	 , jsonNode.name);
+		formElement.setAttribute("name"	 , jsonNode.name);
+		formElement.setAttribute("method", jsonNode.method);
+		formElement.setAttribute("class" , jsonNode.class);
+	return formElement;
+}
+
 var  tmplInput = function(jsonNode){
 	console.log("Generando tmplInput." + jsonNode.name);
 		var formGroup = document.createElement("div");
