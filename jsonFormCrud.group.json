@@ -34,7 +34,7 @@
         {
           "group": {
             "type": "tabs",
-            "name": "Firma DGENAM-1",
+            "name": "example",
             "panels": [
               {
                 "name": "Inicio",

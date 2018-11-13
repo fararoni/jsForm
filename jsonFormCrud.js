@@ -46,7 +46,8 @@ function generateForm(jsonForm, cols){
 
 				var input = jsonForm[j];
 				if (isSet(input.group) ){
-					var nodo = generateForm(input.group, cols);
+				//	var nodo = generateForm(input.group, cols);
+				var nodo = 	inputTypes[input.group.type](input.group);
 					divRowForm.appendChild(nodo); 
 				} else {
 					var divCol = document.createElement("div");
@@ -179,14 +180,15 @@ var tmplTabs = function(jsonNode){
 	console.log("Generando tmplTabs." + jsonNode.name);
 	
 	var divRowPanel = document.createElement("div");
-		divRowPanel.className = jsonForm.name;
+		divRowPanel.className = jsonNode.name;
 
 	var ul = document.createElement("ul");
+		ul.className = "nav nav-tabs";
 	var tabContent = document.createElement("div");
 		tabContent.className = "tab-content";
 
 	for (var j = 0; j < jsonNode.panels.length; j++) {
-		var input = jsonForm.panels[j];
+		var input = jsonNode.panels[j];
 		
 		var divLi = document.createElement("li");
 			var divA = document.createElement("a");
@@ -200,7 +202,8 @@ var tmplTabs = function(jsonNode){
 
 		var divTabPane = document.createElement("div");
 			divTabPane.className = "tab-pane";
-			var nodo =  generateForm(input.inputs);
+			divTabPane.setAttribute('id','tab-' + j);
+			var nodo =  generateForm(input.inputs,3);
 			divTabPane.appendChild(nodo);
 		tabContent.appendChild(divTabPane);
 	}
