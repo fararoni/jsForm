@@ -1,9 +1,6 @@
 //----------------------------------------------------------------
 var isSet = function (value) {return !( value === void 0 || value === null ); };
 
-function insertAfter(newNode, referenceNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-}
 function renderJsonForm(jsonObj, divTarget){
 	var form = generateForm(jsonObj);
 	var divForm = document.querySelector(divTarget);
@@ -23,31 +20,30 @@ function generateForm(jsonForm, cols){
 		
 	} else if (Array.isArray(jsonForm) ) {
 		console.log("Generando inputs." );
+		var divRowForm = document.createElement("div");
+			divRowForm.className = 'row';
+
 		var divRow = document.createElement("div");
 			divRow.className = 'row';
 			for (var j = 0; j < jsonForm.length; j++) {
 				var divCol = document.createElement("div");
 				divCol.className = 'col-md-' + (12 / cols);
-				
 				var input = jsonForm[j];
 				if (isSet(input.group) ){
 					var childs = generateForm(input.paginas, cols);
 				}
-
 				var  nodo = inputTypes[jsonForm[j].type](input);
 				divCol.appendChild(nodo);
 				divRow.appendChild(divCol); 
 
 				if ( ((j+1) % cols) == 0){
-					//divForm.appendChild(divRow); 
-					
-					divRowAfter = document.createElement("div");
-					divRowAfter.className = 'row';
-					insertAfter (divRowAfter,divRow );
-					divRow =divRowAfter;
+					divRowForm.appendChild(divRow); 
+					divRow = document.createElement("div");
+					divRow.className = 'row';
 				}
 			}
-		return divRow;
+		divRowForm.appendChild(divRow); 
+		return divRowForm;
 	}
 	return null;
 }
@@ -56,6 +52,8 @@ function generateForm(jsonForm, cols){
 var inputTypes = {
 	'form'	: function(jsNode) {return tmplForm(jsNode)},
 	'text'	: function(jsNode) {return tmplInput(jsNode)},
+	'number'	: function(jsNode) {return tmplInput(jsNode)},
+	'date'	: function(jsNode) {return tmplInput(jsNode)},
 	'tabs'	: function(jsNode) {return tmplText(jsNode)},
 	'radio'	: function(jsNode) {return tmplOptionsInput(jsNode)},
 }
