@@ -1,4 +1,3 @@
 git add .
-git commit -m "up"
-git remote add origin https://github.com/fararoni/jsForm.git
+git commit -m "up1"
 git push -u origin master
