@@ -195,7 +195,7 @@ var tmplTabs = function(jsonNode){
 			divA.setAttribute('data-toggle','tab');
 			divA.setAttribute('href','#tab-' + j);
 			var labelField = document.createElement("label");
-				labelField.innerHTML="test";
+				labelField.innerHTML=input.title;
 				divA.appendChild(labelField);
 				divLi.appendChild(divA);
 		ul.appendChild(divLi); 
