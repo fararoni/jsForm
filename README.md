@@ -34,14 +34,14 @@ Esta compuesta por la siguientes funcionalidades: Definición del Fomulario, Def
   - [Autor](#autor)
   - [License](#license)
 
-## caracteristicas
+## Caracteristicas
 * Formulario. Definición del formulario a partir de un esquema JSON
 * Validación,  para la captura y el envío
 * Envío, del formulario en formato JSON
 * Soporte al ciclo de vida de un CRUD
 
 
-Ejemplo de uso
+## Ejemplo de uso
 ---------------
 
 Este es un ejemplo simple, para generar un formulario de acuerdo a la definicón de la Guía Gráfica de Gob.MX. Como se aprercia, se respeta la plantilla original y los componentes se incorporan de forma natural.
@@ -404,6 +404,17 @@ Esquema
 Documentación
 -------------
 
+Estructura 
+| Elemento | Atributos | Valores |
+|--- | --- | --- |
+|  form | | {} |
+| | method | get, post |
+| | name |  |
+| | action | |
+| | class | clearfix |
+| | inputs | [] |
+| | toolbar |  [] |
+| | columns | 1..12 |
 
 
 Playground
