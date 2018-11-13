@@ -83,7 +83,7 @@ Este es un ejemplo simple, para generar un formulario de acuerdo a la definicón
 ```
 
 Esquema
-* Ejemmplo 1: Formulario Simple. https://jsoneditoronline.org/?id=c43e3fdcc3ff4ab1b4030277020e5934
+* Ejemplo 1: Formulario Simple. https://jsoneditoronline.org/?id=c43e3fdcc3ff4ab1b4030277020e5934
 ```json
 {
   "jsonForm": {
@@ -226,7 +226,7 @@ Esquema
   }
 }
 ```
-* Ejemmplo 2: Paneles https://raw.githubusercontent.com/fararoni/jsForm/master/jsonFormCrud.group.json
+* Ejemplo 2: Paneles https://raw.githubusercontent.com/fararoni/jsForm/master/jsonFormCrud.group.json
 ```json
 {
     "form": {
@@ -404,11 +404,6 @@ Esquema
 Documentación
 -------------
 
-| Command | Description |
-| --- | --- |
-| git status | List all new or modified files |
-| git diff | Show file differences that haven't been staged |
-
 Estructura 
 
 | Elemento | Atributos | Valores |
@@ -422,7 +417,8 @@ Estructura
 | | toolbar |  [] |
 | | columns | 1..12 |
 
-
+* El nombre de los elemtos y atributos debe estar en minuscula
+* Se indicar los elementos y atributos  obligatorios
 Playground
 ----------
 
