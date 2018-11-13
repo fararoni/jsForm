@@ -1,4 +1,3 @@
-//----------------------------------------------------------------
 var isSet = function (value) {return !( value === void 0 || value === null ); };
 
 function renderJsonForm(jsonObj, divTarget){
@@ -16,22 +15,15 @@ function generateForm(jsonForm, cols){
 		nodo.appendChild(child);	
 		return nodo;
 	} else if (isSet(jsonForm.panels) ) {
-
-
 		var divRowPanel = document.createElement("div");
 			divRowPanel.className = jsonForm.name;
-
 		var divRow = document.createElement("div");
 			divRow.className = 'col-md-12' ;
-
-		console.log("Generando panels." + jsonForm.panels);
-
 		for (var j = 0; j < jsonForm.panels.length; j++) {
 			var input = jsonForm.panels[j];
 			var nodo =  generateForm(input.inputs, cols);
 			divRow.appendChild(nodo); 
 		}
-		
 		divRowPanel.appendChild(divRow);	
 		return divRowPanel;
 		
@@ -39,14 +31,11 @@ function generateForm(jsonForm, cols){
 		console.log("Generando inputs." );
 		var divRowForm = document.createElement("div");
 			divRowForm.className = 'row';
-
 		var divRow = document.createElement("div");
 			divRow.className = 'row';
 			for (var j = 0; j < jsonForm.length; j++) {
-
 				var input = jsonForm[j];
 				if (isSet(input.group) ){
-				//	var nodo = generateForm(input.group, cols);
 				var nodo = 	inputTypes[input.group.type](input.group);
 					divRowForm.appendChild(nodo); 
 				} else {
@@ -102,19 +91,16 @@ var tmplHeader = function (jsonNode) {
 }
 var  tmplForm = function(jsonNode){
 	console.log("Generando tmplForm." + jsonNode.name);
-
 	var formElement = document.createElement("form");
 		formElement.setAttribute("id"	 , jsonNode.name);
 		formElement.setAttribute("name"	 , jsonNode.name);
 		formElement.setAttribute("method", jsonNode.method);
 		formElement.setAttribute("class" , jsonNode.class);
 		formElement.setAttribute("role"	 , 'form');
-//	var section = tmplHeader(jsonNode.header);
-	//section.appendChild(formElement);
 	return formElement;
 }
 var  tmplPanels = function(jsonNode){
-	console.log("Generando tmplForm." + jsonNode.name);
+	console.log("Generando tmplPanels." + jsonNode.name);
 	var formElement = document.createElement("dir");
 		formElement.setAttribute("id"	 , jsonNode.name);
 		formElement.setAttribute("name"	 , jsonNode.name);
