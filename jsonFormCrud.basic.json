@@ -5,6 +5,11 @@
         "action": "self",
         "class": "clearfix",
         "columns": 3,
+        "header": {
+          "title": "Formulario básico",
+          "subtitle": "Ejemplo de formulario básico",
+          "intro": "Lorem ipsum dolor sit amet, consectetur consectetur adipiscing elit. Duis consectetur libero id gravida volutpat. Nunc mauris lorem, sodales eu suscipit id, fermentum vitae neque."
+        },
         "inputs": [
             {
                 "type": "text",
@@ -31,7 +36,37 @@
                 "name": "secondName",
                 "label": "Segundo apellido",
                 "placeholder": "Ingresa tu segundo apellido"
-            }
+            },
+			{
+				"type": "radio",
+				"name": "estadoCivil",
+				"label": "Estado civil",
+				"class": "radio-inline",
+				"direction": "vertical",
+				"placeholder": "Estado civil",
+				"values": [
+					{
+						"value": "1",
+						"text": "Soltero"
+					},
+					{
+						"value": "2",
+						"text": "Casado"
+					},
+					{
+						"value": "3",
+						"text": "Unión libre"
+					},
+					{
+						"value": "4",
+						"text": "Divorciado"
+					},
+					{
+						"value": "5",
+						"text": "Viudo"
+					}
+				]
+			}
         ],
         "toolbar": [
             {

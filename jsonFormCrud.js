@@ -1,6 +1,9 @@
 //----------------------------------------------------------------
 var isSet = function (value) {return !( value === void 0 || value === null ); };
 
+function insertAfter(newNode, referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
 function renderJsonForm(jsonObj, divTarget){
 	var form = generateForm(jsonObj);
 	var divForm = document.querySelector(divTarget);
@@ -15,21 +18,36 @@ function generateForm(jsonForm, cols){
 		var child = generateForm(jsonForm.form.inputs, cols);
 		nodo.appendChild(child);	
 		return nodo;
-	} if (Array.isArray(jsonForm) ) {
+	} else if (isSet(jsonForm.group) ) {
+		console.log("Generando group." + jsonForm.group);
+		
+	} else if (Array.isArray(jsonForm) ) {
 		console.log("Generando inputs." );
-		var divCol = document.createElement("div");
-			divCol.className = 'col-md-' + (12 / cols);
-		for (var j = 0; j < jsonForm.length; j++) {
-			var input = jsonForm[j];
-			if (isSet(input.paginas) ){
-				var childs = generateForm(input.paginas, cols);
-				//nodo.appendChild(childs);	
-			}
+		var divRow = document.createElement("div");
+			divRow.className = 'row';
+			for (var j = 0; j < jsonForm.length; j++) {
+				var divCol = document.createElement("div");
+				divCol.className = 'col-md-' + (12 / cols);
+				
+				var input = jsonForm[j];
+				if (isSet(input.group) ){
+					var childs = generateForm(input.paginas, cols);
+				}
 
-			var  nodo = inputTypes[jsonForm[j].type](input);
-			divCol.appendChild(nodo);
-		}
-		return divCol;
+				var  nodo = inputTypes[jsonForm[j].type](input);
+				divCol.appendChild(nodo);
+				divRow.appendChild(divCol); 
+
+				if ( ((j+1) % cols) == 0){
+					//divForm.appendChild(divRow); 
+					
+					divRowAfter = document.createElement("div");
+					divRowAfter.className = 'row';
+					insertAfter (divRowAfter,divRow );
+					divRow =divRowAfter;
+				}
+			}
+		return divRow;
 	}
 	return null;
 }
@@ -37,28 +55,97 @@ function generateForm(jsonForm, cols){
 //------ Tools
 var inputTypes = {
 	'form'	: function(jsNode) {return tmplForm(jsNode)},
-	'text'	: function(jsNode) {return tmplText(jsNode)},
-	'tabs'	: function(jsNode) {return tmplText(jsNode)}
+	'text'	: function(jsNode) {return tmplInput(jsNode)},
+	'tabs'	: function(jsNode) {return tmplText(jsNode)},
+	'radio'	: function(jsNode) {return tmplOptionsInput(jsNode)},
 }
 
+
+var tmplHeader = function (jsonNode) {
+	console.log("Generando tmplHeader." );
+    var section = document.createElement('section'); 
+        var renglon = document.createElement('row');
+            var title = document.createElement('h1');
+                title.textContent = jsonNode.title;
+            var subTitle = document.createElement('h2');
+				subTitle.textContent = jsonNode.subtitle;
+            var hr = document.createElement('hr');
+				hr.className = 'red';
+            var intro = document.createElement('p');
+				intro.textContent = jsonNode.intro;	
+		renglon.appendChild(title);
+		renglon.appendChild(subTitle);
+		renglon.appendChild(hr);
+		renglon.appendChild(intro);		
+	section.appendChild(renglon);
+    return section;
+    
+}
 var  tmplForm = function(jsonNode){
 	console.log("Generando tmplForm." + jsonNode.name);
+
 	var formElement = document.createElement("form");
 		formElement.setAttribute("id"	 , jsonNode.name);
 		formElement.setAttribute("name"	 , jsonNode.name);
 		formElement.setAttribute("method", jsonNode.method);
 		formElement.setAttribute("class" , jsonNode.class);
 		formElement.setAttribute("role"	 , 'form');
+//	var section = tmplHeader(jsonNode.header);
+	//section.appendChild(formElement);
 	return formElement;
 }
-var tmplText = function(jsonNode){
-	console.log("Generando tmplText." + jsonNode.name);
-	var formElement = document.createElement("input");
-		formElement.setAttribute("id"	 , jsonNode.name);
-		formElement.setAttribute("type", jsonNode.type);
-		formElement.setAttribute("name"	 , jsonNode.name);
-		formElement.setAttribute("class", 'form-control');
-	return formElement;
+var  tmplInput = function(jsonNode){
+	console.log("Generando tmplInput." + jsonNode.name);
+		var formGroup = document.createElement("div");
+			formGroup.className = 'form-group';
+			
+		var formField = document.createElement("input");
+			formField.setAttribute("id", jsonNode.name);
+			formField.setAttribute("type", jsonNode.type);
+			formField.setAttribute("name", jsonNode.name);
+			formField.setAttribute("class", 'form-control');
+		
+		var labelField = document.createElement("label");
+			labelField.innerHTML=jsonNode.label;
+			if ( isSet ( jsonNode.required ) && jsonNode.required )
+				labelField.innerHTML+="*:";
+            labelField.htmlFor = jsonNode.name;
+			
+		formGroup.appendChild(labelField);  
+		formGroup.appendChild(formField);  
+		return formGroup;
+}
+var tmplOptionsInput = function(jsonNode){
+	console.log("Generando tmplOptionsInput." + jsonNode.name);
+	var formGroup = document.createElement("div");
+			formGroup.className = 'form-group';
+			var formField = document.createElement("div");
+			jsonNode.values.forEach(function(element) {
+				var option = document.createElement("input"); 
+					option.setAttribute('type'	, jsonNode.type);
+					option.setAttribute('id'	, jsonNode.name);
+					option.setAttribute('name'	, jsonNode.name);
+					option.setAttribute('value'	, element.value);
+				var label = document.createElement( 'label');
+				label.className = jsonNode.class;
+				label.innerHTML = option.outerHTML + element.text;
+				if (jsonNode.direction == 'vertical') {
+					var vertical = document.createElement( 'div');
+					vertical.appendChild(label);
+					formField.appendChild(vertical);  
+				} else {
+					formField.appendChild(label);  
+				}
+			});
+		
+		var labelField = document.createElement("label");
+			labelField.innerHTML=jsonNode.label;
+			if ( isSet ( jsonNode.required ) && jsonNode.required )
+				labelField.innerHTML+="*:";
+            labelField.htmlFor = jsonNode.name;
+		formGroup.appendChild(labelField);  
+		formGroup.appendChild(formField);  
+		return formGroup;
 }
 var tmplTabs = function(jsonNode){
 	console.log("Generando tmplTabs." + jsonNode.name);
