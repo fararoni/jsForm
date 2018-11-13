@@ -16,25 +16,24 @@ function generateForm(jsonForm, cols){
 		nodo.appendChild(child);	
 		return nodo;
 	} else if (isSet(jsonForm.panels) ) {
-		var divRowGroup = document.createElement("div");
-			divRowGroup.className = 'row';
+
+
+		var divRowPanel = document.createElement("div");
+			divRowPanel.className = jsonForm.name;
 
 		var divRow = document.createElement("div");
-			divRow.className = 'row';
+			divRow.className = 'col-md-12' ;
 
 		console.log("Generando panels." + jsonForm.panels);
-		
-//		var cols = jsonForm.form.columns;
+
 		for (var j = 0; j < jsonForm.panels.length; j++) {
-			var divCol = document.createElement("div");
 			var input = jsonForm.panels[j];
 			var nodo =  generateForm(input.inputs, cols);
-			divCol.appendChild(nodo);
-			divRow.appendChild(divCol); 
+			divRow.appendChild(nodo); 
 		}
 		
-		divRowGroup.appendChild(divRow);	
-		return divRowGroup;
+		divRowPanel.appendChild(divRow);	
+		return divRowPanel;
 		
 	} else if (Array.isArray(jsonForm) ) {
 		console.log("Generando inputs." );
@@ -44,22 +43,22 @@ function generateForm(jsonForm, cols){
 		var divRow = document.createElement("div");
 			divRow.className = 'row';
 			for (var j = 0; j < jsonForm.length; j++) {
-				var divCol = document.createElement("div");
-				divCol.className = 'col-md-' + (12 / cols);
+
 				var input = jsonForm[j];
 				if (isSet(input.group) ){
 					var nodo = generateForm(input.group, cols);
-					///var  nodo = inputTypes[jsonForm[j].type](input);
+					divRowForm.appendChild(nodo); 
 				} else {
+					var divCol = document.createElement("div");
+					divCol.className = 'col-md-' + (12 / cols);
 					var  nodo = inputTypes[jsonForm[j].type](input);
-				}
-				divCol.appendChild(nodo);
-				divRow.appendChild(divCol); 
-
-				if ( ((j+1) % cols) == 0){
-					divRowForm.appendChild(divRow); 
-					divRow = document.createElement("div");
-					divRow.className = 'row';
+					divCol.appendChild(nodo);
+					divRow.appendChild(divCol); 
+					if ( ((j+1) % cols) == 0){
+						divRowForm.appendChild(divRow); 
+						divRow = document.createElement("div");
+						divRow.className = 'row';
+					}
 				}
 			}
 		divRowForm.appendChild(divRow); 
@@ -178,140 +177,36 @@ var tmplOptionsInput = function(jsonNode){
 }
 var tmplTabs = function(jsonNode){
 	console.log("Generando tmplTabs." + jsonNode.name);
-	var formElement = document.createElement("input");
-		formElement.setAttribute("id"	 , jsonNode.name);
-		formElement.setAttribute("type", jsonNode.type);
-		formElement.setAttribute("name"	 , jsonNode.name);
-		formElement.setAttribute("class", 'form-control');
-	return formElement;
-}
-
-
-//-----------------------------------------------------------
-function parseJsonForm(jsonObj) {
-	console.log("jsonObj:" + jsonObj);
 	
-	populateHeader(jsonObj);
-  
-}
-function populateHeader(jsonObj) {
-	var section = document.createElement('section'); 
-		var renglon = document.createElement('row'); 
-			var title = document.createElement('h1');
-				title.textContent = jsonObj['jsonForm']['header']['title'];
-			var subTitle = document.createElement('h2');
-				subTitle.textContent = jsonObj['jsonForm']['header']['subtitle'];
-			var hr = document.createElement('hr');
-				hr.className = 'red';
-				subTitle.textContent = jsonObj['jsonForm']['header']['subtitle'];
-			var intro = document.createElement('p');
-				intro.textContent = jsonObj['jsonForm']['header']['intro'];	
+	var divRowPanel = document.createElement("div");
+		divRowPanel.className = jsonForm.name;
 
-		renglon.appendChild(title);
-		renglon.appendChild(subTitle);
-		renglon.appendChild(hr);
-		renglon.appendChild(intro);
+	var ul = document.createElement("ul");
+	var tabContent = document.createElement("div");
+		tabContent.className = "tab-content";
 
-	//----
-	
-	var cols = jsonObj['jsonForm']['cols'];
-var divForm = document.createElement("form");
-	divForm.setAttribute("id", jsonObj['jsonForm']['name']);
-	divForm.setAttribute("name", jsonObj['jsonForm']['name']);
-	divForm.setAttribute("class", jsonObj['jsonForm']['class']);
-	divForm.setAttribute("role", 'form');
+	for (var j = 0; j < jsonNode.panels.length; j++) {
+		var input = jsonForm.panels[j];
+		
+		var divLi = document.createElement("li");
+			var divA = document.createElement("a");
+			divA.setAttribute('data-toggle','tab');
+			divA.setAttribute('href','#tab-' + j);
+			var labelField = document.createElement("label");
+				labelField.innerHTML="test";
+				divA.appendChild(labelField);
+				divLi.appendChild(divA);
+		ul.appendChild(divLi); 
 
-
-var divRow = document.createElement("div");
-	divRow.className = 'row';
-	var formFields = jsonObj['jsonForm']['inputs'];
-	for (var j = 0; j < formFields.length; j++) {
-		var divCol = document.createElement("div");
-			divCol.className = 'col-md-' + (12 / cols);
-			
-		var formGroup = document.createElement("div");
-			formGroup.className = 'form-group';
-			
-		var formField = null;
-		  if (formFields[j].type == 'radio' || formFields[j].type == 'checkbox') {
-			var formField = document.createElement("div");
-			formFields[j].values.forEach(function(element) {
-			  console.log(element);
-				var option = document.createElement("input"); 
-					option.setAttribute('type'	, formFields[j].type);
-					option.setAttribute('id'	, formFields[j].name);
-					option.setAttribute('name'	, formFields[j].name);
-					option.setAttribute('value'	, element.value);
-				var label = document.createElement( 'label');
-				label.className = formFields[j].class;
-				label.innerHTML = option.outerHTML + element.text;
-				if (formFields[j].direction == 'vertical') {
-					var vertical = document.createElement( 'div');
-					vertical.appendChild(label);
-					formField.appendChild(vertical);  
-				} else {
-					formField.appendChild(label);  
-				}
-			});
-		  }	 else {
-			  formField = document.createElement("input");
-			  formField.setAttribute("id", formFields[j].name);
-			  formField.setAttribute("type", formFields[j].type);
-			  formField.setAttribute("name", formFields[j].name);
-			  formField.setAttribute("class", 'form-control');
-		  }
-		  
-			
-		var labelField = document.createElement("label");
-			labelField.innerHTML=formFields[j].label;
-			if ( formFields[j].required )
-				labelField.innerHTML+="*:";
-            labelField.htmlFor = formFields[j].name;
-			
-		formGroup.appendChild(labelField);  
-		formGroup.appendChild(formField);  
-		divCol.appendChild(formGroup); 
-		divRow.appendChild(divCol); 
-		salto = (j+1) % cols;
-		if ( salto == 0){
-			divForm.appendChild(divRow); 
-			divRow = document.createElement("div");
-			divRow.className = 'row';
-		}		
-    }
-	renglon.appendChild(divForm);
-	section.appendChild(renglon);
-	
-	//---------------- Footer Buttons
-	var sectionButtons 	  = document.createElement('section'); 
-	var renglon 		  = document.createElement('row'); 
-	var divSectionButtons = document.createElement('div'); 
-		divSectionButtons.className = 'clearfix';
-	var divButtons = document.createElement('div'); 
-		divButtons.className = 'pull-right';
-	
-	var formButtons = jsonObj['jsonForm']['buttons'];
-	for (var j = 0; j < formButtons.length; j++) {
-		var formButton = document.createElement("button");
-		//formButton.class = formButtons[j].class;
-		formButton.setAttribute("class", formButtons[j].class);
-		formButton.setAttribute("type", formButtons[j].type);
-		formButton.value = formButtons[j].label;
-		formButton.innerHTML = formButtons[j].label;
-		divButtons.appendChild(formButton);
+		var divTabPane = document.createElement("div");
+			divTabPane.className = "tab-pane";
+			var nodo =  generateForm(input.inputs);
+			divTabPane.appendChild(nodo);
+		tabContent.appendChild(divTabPane);
 	}
-	divSectionButtons.appendChild(divButtons);
-	renglon.appendChild(divSectionButtons);
-	sectionButtons.appendChild(renglon);
-			  
-	section.appendChild(sectionButtons);
+	divRowPanel.appendChild(ul);
+	divRowPanel.appendChild(tabContent);
 	
-	var jsonForm = document.querySelector('jsonForm');
-	
-	jsonForm.appendChild(section);
-//	jsonForm.appendChild(sectionButtons);
+	return divRowPanel;
+
 }
-
-
-
-
